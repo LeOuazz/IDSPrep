@@ -191,4 +191,7 @@ export const feedbackSchema = z.object({
 
 export const interviewCovers = [
   "/interview.png",
+  "/interview1.png",
+  "/interview2.png",
+  "/interview3.png",
 ];
