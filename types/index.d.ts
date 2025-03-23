@@ -14,7 +14,7 @@ interface Feedback {
 }
 
 interface Interview {
-  id: string;
+  id?: string;  // Optional because it might not exist before saving to Firebase
   role: string;
   level: string;
   questions: string[];
@@ -23,6 +23,17 @@ interface Interview {
   userId: string;
   type: string;
   finalized: boolean;
+  coverImage?: string;  // Added to match your updated code
+}
+
+// For creating a new interview
+interface CreateInterviewParams {
+  role: string;
+  level: string;
+  techstack: string;
+  type: string;
+  amount: string | number;
+  userid: string;
 }
 
 interface CreateFeedbackParams {
@@ -45,6 +56,7 @@ interface InterviewCardProps {
   type: string;
   techstack: string[];
   createdAt?: string;
+  coverImage?: string;  // Added to match your updated code
 }
 
 interface AgentProps {
@@ -86,7 +98,7 @@ interface SignUpParams {
 type FormType = "sign-in" | "sign-up";
 
 interface InterviewFormProps {
-  interviewId: string;
+  interviewId?: string;  // Made optional for new interviews
   role: string;
   level: string;
   type: string;
@@ -96,4 +108,28 @@ interface InterviewFormProps {
 
 interface TechIconProps {
   techStack: string[];
+}
+
+// API response types
+interface ApiResponse<T = any> {
+  success: boolean;
+  error?: string | object;
+  data?: T;
+  interviewId?: string;
+}
+
+// For Generate API route
+interface GenerateInterviewRequest {
+  type: string;
+  role: string;
+  level?: string;
+  techstack: string;
+  amount: string | number;
+  userid: string;
+}
+
+interface GenerateInterviewResponse {
+  success: boolean;
+  interviewId?: string;
+  error?: string;
 }

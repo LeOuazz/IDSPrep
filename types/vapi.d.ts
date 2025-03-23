@@ -1,3 +1,4 @@
+// VAPI Enums
 enum MessageTypeEnum {
   TRANSCRIPT = "transcript",
   FUNCTION_CALL = "function-call",
@@ -16,6 +17,7 @@ enum TranscriptMessageTypeEnum {
   FINAL = "final",
 }
 
+// VAPI Base Interfaces
 interface BaseMessage {
   type: MessageTypeEnum;
 }
@@ -44,7 +46,76 @@ interface FunctionCallResultMessage extends BaseMessage {
   };
 }
 
-type Message =
-  | TranscriptMessage
-  | FunctionCallMessage
-  | FunctionCallResultMessage;
+interface AddMessage extends BaseMessage {
+  type: MessageTypeEnum.ADD_MESSAGE;
+  message: {
+    role: MessageRoleEnum;
+    content: string;
+  };
+}
+
+// Main Message type for VAPI
+type VapiMessage =
+    | TranscriptMessage
+    | FunctionCallMessage
+    | FunctionCallResultMessage
+    | AddMessage;
+
+// Integration with your application
+
+// For storing VAPI responses in Firebase
+interface VapiTranscript {
+  messages: {
+    role: string;
+    content: string;
+    timestamp?: string;
+  }[];
+  interviewId: string;
+  userId: string;
+}
+
+// For generating interviews with VAPI
+interface GenerateInterviewWithVapi {
+  type: string;
+  role: string;
+  level: string;
+  techstack: string;
+  amount: string | number;
+  userid: string;
+  vapiSessionId?: string;
+}
+
+// Configuration for VAPI client
+interface VapiClientConfig {
+  assistantId: string;
+  sessionId?: string;
+  userId: string;
+  initialMessages?: {
+    role: MessageRoleEnum;
+    content: string;
+  }[];
+}
+
+// VAPI Function types for interview process
+interface VapiFunctions {
+  generateFeedback: (params: CreateFeedbackParams) => Promise<Feedback>;
+  storeTranscript: (params: VapiTranscript) => Promise<{ success: boolean }>;
+  getInterviewQuestions: (interviewId: string) => Promise<string[]>;
+}
+
+// Export all types
+export {
+  MessageTypeEnum,
+  MessageRoleEnum,
+  TranscriptMessageTypeEnum,
+  type BaseMessage,
+  type TranscriptMessage,
+  type FunctionCallMessage,
+  type FunctionCallResultMessage,
+  type AddMessage,
+  type VapiMessage,
+  type VapiTranscript,
+  type GenerateInterviewWithVapi,
+  type VapiClientConfig,
+  type VapiFunctions
+};
