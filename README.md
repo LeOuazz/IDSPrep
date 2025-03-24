@@ -1,4 +1,4 @@
-Built with Next.js for the user interface and backend logic, Firebase for authentication and data storage, styled with TailwindCSS and using Vapi's voice agents, Prepwise is a website project designed to help you learn integrating AI models with your apps. The platform offers a sleek and modern experience for job interview preparation.v
+Built with Next.js for the user interface and backend logic, Firebase for authentication and data storage, styled with TailwindCSS and using Vapi's voice agents, IDS PrepAI is a website project designed to help me learn integrating AI models with  apps. The platform offers a sleek and modern experience for job interview preparation.
 
 🔋 Features
 👉 Authentication: Sign Up and Sign In using password/email authentication handled by Firebase.
